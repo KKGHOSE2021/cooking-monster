@@ -1,0 +1,25 @@
+
+#all-menu{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+}
+
+.single-menu{  
+    background-color: whitesmoke; 
+    border-radius: 20px; 
+    padding-bottom: 20px;     
+    width: 200px;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-name{    
+    font-size: 15px;
+    color:black;
+}
+
+.menu-img{
+    width: 200px;
+    padding-bottom: 20px;
+}
