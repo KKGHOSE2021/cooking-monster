@@ -17,6 +17,7 @@ searchBtn.addEventListener('click', () => {
 const displayAllMenu = allMenu =>{        
     const allMenuDiv = document.getElementById('all-menu');
     allMenuDiv.innerHTML = '';
+    document.getElementById('ingredient-container').innerHTML = '';
     allMenu.meals.forEach(singleMenu => {
         const {strMeal, strMealThumb} = singleMenu;
         const singleMenuDiv = document.createElement('div');
