@@ -1,3 +1,5 @@
+
+// Fixed API Link
 const apiBase = 'https://www.themealdb.com/api/json/v1/1/search.php';
 
 const getMealData = meal => {
@@ -7,6 +9,8 @@ const getMealData = meal => {
         .then(data => displayAllMenu(data));                
 }
 
+
+// Fetch search query text
 const searchBtn = document.getElementById('search_button');
 searchBtn.addEventListener('click', () => {    
     let inputMenu = document.getElementById('meal').value;
@@ -14,8 +18,9 @@ searchBtn.addEventListener('click', () => {
 })
 
 
+// Display All menu from API based on search query
 const displayAllMenu = allMenu =>{        
-    const allMenuDiv = document.getElementById('all-menu');
+    const allMenuDiv = document.getElementById('all-menu'); 
     allMenuDiv.innerHTML = '';
     document.getElementById('ingredient-container').innerHTML = '';
     allMenu.meals.forEach(singleMenu => {
@@ -33,6 +38,8 @@ const displayAllMenu = allMenu =>{
     });
 }
 
+
+// Fetch ingredients data for selected menu
 const getIngredientsData = menuName =>{
     const url = `${apiBase}?s=${menuName}`;
     fetch(url)
@@ -40,9 +47,22 @@ const getIngredientsData = menuName =>{
         .then(data => displayMenuIngredients(data.meals[0]));
 }
 
+// List ingredients from API
+const listMenuIngredients = list => {    
+    let ingredients = '';
+    for (let i = 1; i <= 10; i++){
+        objectStr = list["strIngredient" + i];
+            if (objectStr !=="" && objectStr !==null ) { 
+                ingredients += `<li>${objectStr[0].toUpperCase() + objectStr.substring(1)}</li>`;  
+            }  
+    }  
+    return ingredients;  
+}
+
+// Display ingredients on selected menu
 const displayMenuIngredients = getMenu => {
     const {strMeal, strMealThumb} = getMenu;
-    const menuIngredients = document.getElementById('ingredient-container');
+    const menuIngredients = document.getElementById('ingredient-container');    
     menuIngredients.innerHTML = `
     <div class="meal-ingredients">
     <img class="menu-img rounded" src="${strMealThumb}">
@@ -54,13 +74,4 @@ const displayMenuIngredients = getMenu => {
     </div>
     `;
 }
-
-const listMenuIngredients = list => {
-    let ingredients = '';
-    for (let i = 1; i <= 10; i++) {        
-       ingredients+= `<li>${list["strIngredient" + i]}</li>`;
-    }   
-    return ingredients;    
-}
-
 
